@@ -1,4 +1,5 @@
 import Resolver from 'resolver';
+import Config from 'appkit/config';
 
 var App = Ember.Application.create({
   LOG_ACTIVE_GENERATION: true,
@@ -6,7 +7,7 @@ var App = Ember.Application.create({
   LOG_TRANSITIONS: true,
   modulePrefix: 'appkit',
   Resolver: Resolver,
-  TTRSS_URL: "https://www.packetspike.net/ttrss/api/"
+  TTRSS_URL: Config.TTRSS_URL
 });
 
 import routes from 'appkit/routes';
