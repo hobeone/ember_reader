@@ -22,6 +22,7 @@ var FeedController = ArrayController.extend({
       var url = this.get('content').objectAt(0).get('link');
       console.log("opening: ", url);
       window.open(url, '_blank');
+      //old_item.markRead();
     }
   }
 });

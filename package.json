@@ -43,6 +43,7 @@
     "grunt-dom-munger": "~2.0.1"
   },
   "dependencies": {
+    "bower": "*",
     "loom": "~2.0.0",
     "loom-generators-ember": "0.0.1"
   }

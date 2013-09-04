@@ -1,8 +1,9 @@
 {
-  "name": "ember-app-kit",
+  "name": "ember_reader",
   "dependencies": {
     "ember": "http://builds.emberjs.com/stable/ember.js",
     "ember-prod": "http://builds.emberjs.com/stable/ember.prod.js",
+    "ember-model": "http://builds.erikbryn.com/ember-model/ember-model-latest.js",
     "handlebars": "1.0.0",
     "jquery": "~1.9.1",
     "qunit": "~1.12.0"
