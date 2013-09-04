@@ -8,13 +8,12 @@ module("Acceptances - Index", {
 });
 
 test("index renders", function(){
-  expect(3);
-
   visit('/').then(function(){
-    ok(exists("h2:contains('Welcome to Ember.js')"));
+    ok(exists("a:contains('EmberReader')"));
 
-    var list = find("ul li");
-    equal(list.length, 3);
-    equal(list.text(), "redyellowblue");
+    var list = find(".nav li:eq(0) > a");
+    find(".nav li:eq(0) > a");
+    equal(list.length, 1);
+    equal(list.text(), 'Feeds')
   });
 });

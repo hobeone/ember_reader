@@ -1,8 +1,8 @@
 function Routes() {
-  // // routes/resources
-  // this.resource('posts', function() {
-  //   this.route('new');
-  // });
+  this.route('login');
+  this.resource('feeds', function() {
+    this.resource('feed', { path: '/:feed_id' });
+  });
 }
 
 export default Routes;

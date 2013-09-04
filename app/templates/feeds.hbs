@@ -1,0 +1,13 @@
+<div class="row-fluid">
+<div class="span3">
+<ul class="unstyled" id="feed-list">
+{{#each i in model}}
+  <li><i class="icon-list"></i>{{#linkTo "feed" i}}{{i.title}} ({{i.unread}}){{/linkTo}}</li>
+{{/each}}
+</ul>
+</div>
+<div class="span9">
+  {{outlet}}
+</div>
+</div>
+

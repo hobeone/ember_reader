@@ -3,8 +3,10 @@ import Resolver from 'resolver';
 var App = Ember.Application.create({
   LOG_ACTIVE_GENERATION: true,
   LOG_VIEW_LOOKUPS: true,
-  modulePrefix: 'appkit', // TODO: loaded via config
-  Resolver: Resolver
+  LOG_TRANSITIONS: true,
+  modulePrefix: 'appkit',
+  Resolver: Resolver,
+  TTRSS_URL: "https://www.packetspike.net/ttrss/api/"
 });
 
 import routes from 'appkit/routes';

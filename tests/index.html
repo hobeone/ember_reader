@@ -2,13 +2,16 @@
 <html>
 <head>
   <title>App Kit</title>
+  <link rel="stylesheet" href="/assets/normalize.css">
+  <link rel="stylesheet" href="/assets/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/style.css">
+
   <link rel="stylesheet" href="/assets/app.css"    media="all">
   <link rel="stylesheet" href="/vendor/qunit/qunit/qunit.css"   media="all">
   <style>
     #ember-testing-container {
       position: absolute;
       background: white;
-      bottom: 0;
       right: 0;
       width: 640px;
       height: 384px;
@@ -22,8 +25,9 @@
   </style>
 
   <script src="/vendor/jquery/jquery.js"></script>
-  <script src="/vendor/handlebars/handlebars.runtime.js"></script>
+  <script src="/vendor/handlebars/handlebars.js"></script>
   <script src="/vendor/ember/index.js"></script>
+  <script src="/vendor/ember-model/ember-model.js"></script>
   <script src="/vendor/loader.js"></script>
 
   <script src="/assets/app.js"></script>

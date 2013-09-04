@@ -1,3 +1,18 @@
-<h2>Welcome to Ember.js</h2>
-
-{{outlet}}
+<div class="container-fluid">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="#">EmberReader</a>
+      <ul class="nav pull-right">
+        <li>{{#linkTo 'feeds'}}Feeds{{/linkTo}}</li>
+        {{#if controllers.login.session_id}}          
+          <li><a {{action 'logout'}}>Logout</a></li>
+        {{else}}
+          <li>{{#linkTo 'login'}}Login{{/linkTo}}</li>
+        {{/if}}
+      </ul>
+    </div>
+  </div>
+  <div class="main-content">
+    {{outlet}}
+  </div>
+</div>
