@@ -1,5 +1,6 @@
 import Resolver from 'resolver';
 import Config from 'appkit/config';
+import routes from 'appkit/routes';
 
 var App = Ember.Application.create({
   LOG_ACTIVE_GENERATION: true,
@@ -10,7 +11,26 @@ var App = Ember.Application.create({
   TTRSS_URL: Config.TTRSS_URL
 });
 
-import routes from 'appkit/routes';
 App.Router.map(routes); // TODO: just resolve the router
+
+App.Auth = Ember.Auth.create({
+  requestAdapter: 'jquery',
+  responseAdapter: 'json',
+  strategyAdapter: 'token',
+  baseUrl: Config.TTRSS_URL,
+  signInEndPoint: '/',
+  signOutEndPoint: '/',
+
+  modules: ['authRedirectable'],
+  authRedirectable: {
+    route: 'login'
+  },
+  data: {
+    'user': '(user value)',
+    'password': '(password value)'
+  }
+});
+
+App.SecretRoute = Ember.Route.extend(App.Auth.AuthRedirectable);
 
 export default App;

@@ -4,10 +4,10 @@
       <a class="brand" href="#">EmberReader</a>
       <ul class="nav pull-right">
         <li>{{#linkTo 'feeds'}}Feeds{{/linkTo}}</li>
-        {{#if controllers.login.session_id}}          
+        {{#if App.Auth.signedIn}}
           <li><a {{action 'logout'}}>Logout</a></li>
         {{else}}
-          <li>{{#linkTo 'login'}}Login{{/linkTo}}</li>
+        <li>Login</li>
         {{/if}}
       </ul>
     </div>
