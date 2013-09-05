@@ -3,6 +3,10 @@ import LoginController from 'appkit/controllers/login';
 import Feed from 'appkit/models/feed';
 import Item from 'appkit/models/item';
 
+App.Auth.requestAdapter = 'dummy';
+App.Auth.responseAdapter = 'dummy';
+App.Auth.strategyAdapter = 'dummy';
+
 var FEED_FIXTURES = Ember.A([
   {
     id: 1,
@@ -63,7 +67,7 @@ Feed.FIXTURES = FEED_FIXTURES;
 
 Item.adapter = Ember.FixtureAdapter.create({
   findQuery: function(klass, records, params) {
-    records.load(klass, klass.FIXTURES)
+    records.load(klass, klass.FIXTURES);
   }
 });
 Item.FIXTURES = ITEM_FIXTURES;
@@ -75,12 +79,8 @@ module("Acceptances - Feeds", {
 });
 
 test("feeds needs login", function(){
-  expect(5);
-  Ember.run(function() {
-    Ember.controllerFor(App.__container__, 'login').set('session_id', '')
-  });
-  equal(Ember.controllerFor(App.__container__, 'login').get('session_id'), '');
-  localStorage.session_id = '';
+  expect(4);
+  App.Auth.destroySession();
   visit('/feeds').then(function(){
     ok(exists("a:contains('EmberReader')"));
     ok(exists("h2:contains('Log In')"));
@@ -93,26 +93,23 @@ test("feeds needs login", function(){
 
 test("feeds renders when logged in", function(){
   Ember.run(function() {
-    Ember.controllerFor(App.__container__, 'login').set('session_id', 1)
+    App.Auth.createSession('{"foo": "bar"}');
   });
-
-  expect(4)
-  equal(Ember.controllerFor(App.__container__, 'login').get('session_id'), 1)
+  expect(3);
   visit('/feeds').then(function(){
     ok(exists("a:contains('EmberReader')"));
     var list = find("#feed-list > li");
     equal(list.length, 2);
-    equal(list.text(), 'foobar (10)baz (3)')
+    equal(list.text(), 'foobar (10)baz (3)');
   });
 });
 
 
 test("show feed", function() {
   Ember.run(function() {
-    Ember.controllerFor(App.__container__, 'login').set('session_id', 1)
+    App.Auth.createSession('{"foo": "bar"}');
   });
 
-  equal(Ember.controllerFor(App.__container__, 'login').get('session_id'), 1)
   visit('/feeds/1').then(function() {
     ok(exists("a:contains('EmberReader')"));
     var list = find(".hero-unit");
@@ -125,9 +122,8 @@ test("show feed", function() {
 
 test("keyboard navigation of items", function() {
   Ember.run(function() {
-    Ember.controllerFor(App.__container__, 'login').set('session_id', 1)
+    App.Auth.createSession('{"foo": "bar"}');
   });
-  equal(Ember.controllerFor(App.__container__, 'login').get('session_id'), 1)
 
   visit('/feeds/1').then(function() {
     var list = find(".hero-unit");
@@ -155,9 +151,8 @@ test("keyboard navigation of items", function() {
 
 test("keyboard open of item", function() {
   Ember.run(function() {
-    Ember.controllerFor(App.__container__, 'login').set('session_id', 1)
+    App.Auth.createSession('{"foo": "bar"}');
   });
-  equal(Ember.controllerFor(App.__container__, 'login').get('session_id'), 1)
 
   visit('/feeds/1').then(function() {
     var list = find(".hero-unit");

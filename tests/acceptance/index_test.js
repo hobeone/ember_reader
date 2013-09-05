@@ -14,6 +14,6 @@ test("index renders", function(){
     var list = find(".nav li:eq(0) > a");
     find(".nav li:eq(0) > a");
     equal(list.length, 1);
-    equal(list.text(), 'Feeds')
+    equal(list.text(), 'Feeds');
   });
 });

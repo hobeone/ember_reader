@@ -24,7 +24,7 @@ module("Unit - FeedsController", {
 
 test("it exists", function(){
   Ember.run(function() {
-    Ember.controllerFor(App.__container__, 'login').set('session_id', 1)
+    App.Auth.createSession('{"foo": "bar"}');
   });
 
   visit('/feeds').then(function(){
@@ -37,7 +37,7 @@ test("it exists", function(){
     Feed.FIXTURES = [{id: 3, title: 'reloaded', unread: 10}];
     Ember.run(function() {
       Ember.controllerFor(App.__container__, 'feeds').send('reloadFeeds');
-    })
+    });
   })
   .then(function(){
     var list = find("#feed-list > li");
