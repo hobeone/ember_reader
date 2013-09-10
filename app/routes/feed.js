@@ -3,7 +3,6 @@ import Item from 'appkit/models/item';
 var FeedRoute = Ember.Route.extend({
   model: function(params){
     console.log("model feed", params);
-    //return App.Item.findQuery({id: params.feed_id});
     return {id: params.feed_id};
   },
   setupController: function(controller, model) {

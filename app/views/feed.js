@@ -1,9 +1,9 @@
 var FeedView = Ember.View.extend({
   templateName: 'feed',
-  didInsertElement: function() {
-    return this.$().attr({ tabindex: 1 }), this.$().focus();
-  },
-
+//  didInsertElement: function() {
+//   return this.$().attr({ tabindex: 1 }), this.$().focus();
+//  },
+/*
   keyPress: function(key) {
     switch(key.keyCode) {
       case 74:
@@ -23,7 +23,7 @@ var FeedView = Ember.View.extend({
         console.log(key);
     }
     var items = $('div.main-content').find('.hero-unit');
-  }
+  }*/
 });
 
 export default FeedView;

@@ -1,4 +1,5 @@
 import App from 'appkit/app';
+import ItemFixtures from 'appkit/models/item_fixtures';
 
 var Item = Ember.Model.extend({
   id: Ember.attr(),
@@ -66,4 +67,23 @@ Item.adapter = Ember.Adapter.create({
   }
 });
 
+if (App.TESTING_MODE) {
+  Item.adapter = Ember.FixtureAdapter.create({
+    findQuery: function(klass, records, params) {
+      console.log("Got fixture result for: "+params);
+      return new Ember.RSVP.Promise(function(resolve, reject) {    
+        var filtered = Em.A();
+        console.log("Searching through "+klass.FIXTURES.length);
+        klass.FIXTURES.forEach(function(child){
+          if (params.id < 0 || (window.parseInt(child.feed_id) === window.parseInt(params.id))) {
+            filtered.pushObject(child);
+          }
+        });
+        console.log("Found "+filtered.length+" records matching feed_id "+params.id);
+        records.load(klass, filtered);
+      });
+    }
+  });
+  Item.FIXTURES = ItemFixtures;
+}
 export default Item;

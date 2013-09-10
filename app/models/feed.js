@@ -1,4 +1,5 @@
 import App from 'appkit/app';
+import FeedFixtures from 'appkit/models/feed_fixtures';
 
 var Feed = Ember.Model.extend({
   title: Ember.attr(),
@@ -38,4 +39,21 @@ Feed.adapter = Ember.Adapter.create({
   }
 });
 
+if (App.TESTING_MODE) {
+  Feed.adapter = Ember.FixtureAdapter.create({
+    findAll: function(klass, records) {
+      return new Ember.RSVP.Promise(function(resolve, reject) {
+        var filtered = Em.A();
+        klass.FIXTURES.forEach(function(child){
+          if (child.unread > 0) {
+            filtered.pushObject(child);
+          }
+        });
+        records.load(klass, filtered);
+      });
+    }
+  });
+
+  Feed.FIXTURES = FeedFixtures;
+}
 export default Feed;

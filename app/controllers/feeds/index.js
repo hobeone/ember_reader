@@ -1,6 +1,6 @@
-import ApplicationController from 'appkit/controllers/application';
+import FeedsController from 'appkit/controllers/feeds';
 
-var FeedsIndexController = ApplicationController.extend({
+var FeedsIndexController = FeedsController.extend({
 });
 
 export default FeedsIndexController;
