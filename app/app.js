@@ -1,6 +1,6 @@
 import Resolver from 'resolver';
 import Config from 'appkit/config';
-import routes from 'appkit/routes';
+import router from 'appkit/router';
 
 var App = Ember.Application.create({
   LOG_ACTIVE_GENERATION: true,
@@ -8,12 +8,13 @@ var App = Ember.Application.create({
   LOG_TRANSITIONS: true,
   LOG_BINDINGS: true,
   modulePrefix: 'appkit',
-  Resolver: Resolver,
   TTRSS_URL: Config.TTRSS_URL,
-  TESTING_MODE: false,
+  OFFLINE_DEV_MODE: true,
+  Resolver: Resolver,
+  Router: Ember.Router.extend({
+    router: router
+  })
 });
-
-App.Router.map(routes); // TODO: just resolve the router
 
 App.Auth = Ember.Auth.create({
   requestAdapter: 'jquery',
@@ -35,8 +36,8 @@ App.Auth = Ember.Auth.create({
 
 App.SecretRoute = Ember.Route.extend(App.Auth.AuthRedirectable);
 
-if (App.TESTING_MODE) {
-  App.Auth.createSession('{"testing": "mode"}');
+if (App.OFFLINE_DEV_MODE) {
+  App.Auth.createSession('{"offline_dev": "mode"}');
 }
 function urlX(url) {
   if(/^https?:\/\//.test(url)) {

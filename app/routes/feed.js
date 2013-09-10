@@ -13,6 +13,8 @@ var FeedRoute = Ember.Route.extend({
     controller.set('model', item_models);
     controller.set('content', item_models);
   },
+
+
 });
 
 export default FeedRoute;

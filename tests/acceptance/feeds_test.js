@@ -80,7 +80,9 @@ module("Acceptances - Feeds", {
 
 test("feeds needs login", function(){
   expect(4);
-  //App.Auth.destroySession();
+  Ember.run(function() {
+    App.Auth.destroySession();
+  });
   visit('/feeds').then(function(){
     ok(exists("a:contains('EmberReader')"));
     ok(exists("h2:contains('Log In')"));

@@ -32,14 +32,10 @@ test("it exists", function(){
     var list = find("#feed-list > li");
     equal(list.length, 2);
     equal(list.text(), 'foobar (10)baz (3)');
-  })
-  .then(function(){
     Feed.FIXTURES = [{id: 3, title: 'reloaded', unread: 10}];
     Ember.run(function() {
-      Ember.controllerFor(App.__container__, 'feeds').send('reloadFeeds');
+     Ember.controllerFor(App.__container__, 'feeds').send('reloadFeeds');
     });
-  })
-  .then(function(){
     var list = find("#feed-list > li");
     equal(list.length, 1);
     equal(list.text(), 'reloaded (10)');

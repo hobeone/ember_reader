@@ -39,7 +39,7 @@ Feed.adapter = Ember.Adapter.create({
   }
 });
 
-if (App.TESTING_MODE) {
+if (App.OFFLINE_DEV_MODE) {
   Feed.adapter = Ember.FixtureAdapter.create({
     findAll: function(klass, records) {
       return new Ember.RSVP.Promise(function(resolve, reject) {

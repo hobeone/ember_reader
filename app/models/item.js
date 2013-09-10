@@ -67,7 +67,7 @@ Item.adapter = Ember.Adapter.create({
   }
 });
 
-if (App.TESTING_MODE) {
+if (App.OFFLINE_DEV_MODE) {
   Item.adapter = Ember.FixtureAdapter.create({
     findQuery: function(klass, records, params) {
       console.log("Got fixture result for: "+params);
