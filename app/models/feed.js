@@ -3,7 +3,15 @@ import FeedFixtures from 'appkit/models/feed_fixtures';
 
 var Feed = Ember.Model.extend({
   title: Ember.attr(),
-  unread: Ember.attr()
+  unread: Ember.attr(Number),
+  items: Ember.A(),
+
+  decrementUnread: function(){
+    var u = this.get('unread');
+    if (u > 0) {
+      this.set('unread', u-1);
+    }
+  }
 });
 
 Feed.adapter = Ember.Adapter.create({

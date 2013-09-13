@@ -8,9 +8,10 @@ var FeedController = ArrayController.extend({
       if (this.get('content').toArray().length > 1) {
         var old_item = this.get('content').shiftObject();
         this.readItems.push(old_item);
+        old_item.markRead();
+        old_item.get('feed').decrementUnread();
         window.scrollTo(0);
       }
-      //old_item.markRead();
     },
     prevItem: function() {
       if (this.readItems.length > 0) {
@@ -22,7 +23,10 @@ var FeedController = ArrayController.extend({
       var url = this.get('content').objectAt(0).get('link');
       console.log("opening: ", url);
       window.open(url, '_blank');
-      //old_item.markRead();
+    },
+    reloadFeed: function() {
+      this.get('content').reload();
+      window.scrollTo(0);
     }
   }
 });

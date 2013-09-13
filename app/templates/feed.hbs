@@ -1,13 +1,8 @@
 <h2>{{title}}</h2>
-{{#each item in content}}
-{{log item}}
-<div class="hero-unit">
-  <h2><a {{bindAttr href="item.link"}} target="_blank">{{item.title}}</a></h2>
-  <small>{{item.feed_title}}</small>
-  <br/>
-  <cite>{{item.author}}</cite>
-  <blockquote class="item_content">
-    {{sanitize item.content}}
-  </blockquote>
-</div>
-{{/each}}
+{{#if content.isLoaded}}
+  {{#each item in content}}
+    {{view App.ItemView}}
+  {{/each}}
+{{else}}
+<p class="loading">Loading Items...</p>
+{{/if}}

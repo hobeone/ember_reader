@@ -1,4 +1,5 @@
 import App from 'appkit/app';
+import Feed from 'appkit/models/feed';
 import ItemFixtures from 'appkit/models/item_fixtures';
 
 var Item = Ember.Model.extend({
@@ -14,11 +15,14 @@ var Item = Ember.Model.extend({
   read: Ember.attr(),
   marked_read: Ember.attr(),
 
+  feed: Ember.belongsTo(Feed, {key: 'feed_id'}),
+
   item_content: function(){
     return this.get('content');
   }.property('content'),
 
   markRead: function() {
+    var self = this;
     return Ember.$.post(
       App.TTRSS_URL,
       JSON.stringify({
@@ -33,8 +37,8 @@ var Item = Ember.Model.extend({
           if (response.content.error) {
             throw "Error: "+response.content.error;
           }
-          this.set('read', true);
-          this.set('marked_read', true);
+          self.set('read', true);
+          self.set('marked_read', true);
           return true;
         }
       );
@@ -47,13 +51,15 @@ Item.adapter = Ember.Adapter.create({
     console.log("item findall arguments:", params);
     var req = {
       op: "getHeadlines",
-      sid: window.localStorage.session_id,
+      sid: App.Session.get('session_id'),
       feed_id: params.id,
-      show_excerpt: true,
+      show_excerpt: false,
       show_content: true,
       view_mode: "unread",
       include_attachments: true,
-      include_nested: true
+      include_nested: true,
+      order_by: 'date_reverse',
+      sanitize: false,
     };
     return Ember.$.post(App.TTRSS_URL, JSON.stringify(req)).then(
       function(response) {

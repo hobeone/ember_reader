@@ -3,7 +3,7 @@ document.write('<div id="ember-testing-container"><div id="ember-testing"></div>
 Ember.testing = true;
 
 var App = requireModule('appkit/app');
-App.OFFLINE_DEV_MODE = false;
+App.OFFLINE_DEV_MODE = true;
   
 App.rootElement = '#ember-testing';
 App.setupForTesting();

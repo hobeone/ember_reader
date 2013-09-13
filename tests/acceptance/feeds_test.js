@@ -1,12 +1,8 @@
 import App from 'appkit/app';
-import LoginController from 'appkit/controllers/login';
 import Feed from 'appkit/models/feed';
 import Item from 'appkit/models/item';
 
-App.Auth.requestAdapter = 'dummy';
-App.Auth.responseAdapter = 'dummy';
-App.Auth.strategyAdapter = 'dummy';
-
+/*
 var FEED_FIXTURES = Ember.A([
   {
     id: 1,
@@ -71,21 +67,22 @@ Item.adapter = Ember.FixtureAdapter.create({
   }
 });
 Item.FIXTURES = ITEM_FIXTURES;
+*/
 
 module("Acceptances - Feeds", {
   setup: function(){
     App.reset();
+    Ember.run(function(){
+      App.Session.set('session_id','');
+    });
   }
 });
 
 test("feeds needs login", function(){
   expect(4);
-  Ember.run(function() {
-    App.Auth.destroySession();
-  });
   visit('/feeds').then(function(){
     ok(exists("a:contains('EmberReader')"));
-    ok(exists("h2:contains('Log In')"));
+    ok(exists("a:contains('Login')"));
 
     var list = find(".nav li:eq(0) > a");
     equal(list.length, 1);
@@ -94,10 +91,10 @@ test("feeds needs login", function(){
 });
 
 test("feeds renders when logged in", function(){
-  Ember.run(function() {
-    App.Auth.createSession('{"foo": "bar"}');
-  });
   expect(3);
+  Ember.run(function(){
+    App.Session.set('session_id', 'testing');
+  });
   visit('/feeds').then(function(){
     ok(exists("a:contains('EmberReader')"));
     var list = find("#feed-list > li");
@@ -108,8 +105,8 @@ test("feeds renders when logged in", function(){
 
 
 test("show feed", function() {
-  Ember.run(function() {
-    App.Auth.createSession('{"foo": "bar"}');
+  Ember.run(function(){
+    App.Session.set('session_id', 'testing');
   });
 
   visit('/feeds/1').then(function() {
@@ -123,8 +120,8 @@ test("show feed", function() {
 });
 
 test("keyboard navigation of items", function() {
-  Ember.run(function() {
-    App.Auth.createSession('{"foo": "bar"}');
+  Ember.run(function(){
+    App.Session.set('session_id', 'testing');
   });
 
   visit('/feeds/1').then(function() {
@@ -152,8 +149,8 @@ test("keyboard navigation of items", function() {
 });
 
 test("keyboard open of item", function() {
-  Ember.run(function() {
-    App.Auth.createSession('{"foo": "bar"}');
+  Ember.run(function(){
+    App.Session.set('session_id', 'testing');
   });
 
   visit('/feeds/1').then(function() {

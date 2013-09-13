@@ -1,6 +1,7 @@
 import App from 'appkit/app';
 import Feed from 'appkit/models/feed';
 
+/*
 var FEED_FIXTURES = [
   {
     id: 1,
@@ -15,6 +16,7 @@ var FEED_FIXTURES = [
 ];
 Feed.adapter = Ember.FixtureAdapter.create();
 Feed.FIXTURES = FEED_FIXTURES;
+*/
 
 module("Unit - FeedsController", {
   setup: function(){
@@ -23,10 +25,6 @@ module("Unit - FeedsController", {
 });
 
 test("it exists", function(){
-  Ember.run(function() {
-    App.Auth.createSession('{"foo": "bar"}');
-  });
-
   visit('/feeds').then(function(){
     ok(exists("a:contains('EmberReader')"));
     var list = find("#feed-list > li");
@@ -36,7 +34,7 @@ test("it exists", function(){
     Ember.run(function() {
      Ember.controllerFor(App.__container__, 'feeds').send('reloadFeeds');
     });
-    var list = find("#feed-list > li");
+    list = find("#feed-list > li");
     equal(list.length, 1);
     equal(list.text(), 'reloaded (10)');
   });

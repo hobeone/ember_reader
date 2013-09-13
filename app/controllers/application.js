@@ -19,10 +19,8 @@ var ApplicationController = Ember.Controller.extend({
         case 82:
           console.log("reload feeds");
           this.get('controllers.feeds').send('reloadFeeds');
+          this.get('controllers.feed').send('reloadFeed');
           break;
-        default:
-          console.log("application router keypress");
-          console.log(key);
       }
     },
   }
