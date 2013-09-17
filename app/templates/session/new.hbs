@@ -1,4 +1,4 @@
-{{#if App.Session.session_id}}
+{{#if App.Session.sessionId}}
   <p>You are already logged in!</p>
 {{else}}
   <form class="form-inline" {{action login on="submit"}}>
@@ -11,4 +11,3 @@
     <div class="alert alert-error">{{errorMessage}}</div>
   {{/if}}
 {{/if}}
-

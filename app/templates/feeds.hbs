@@ -2,7 +2,7 @@
 <div class="span3">
   <ul class="unstyled" id="feed-list">
     {{#if model.isLoaded}}
-      {{#each i in model}}
+      {{#each i in feeds_with_items}}
       <li><i class="icon-list"></i>{{#linkTo "feed" i}}{{i.title}} ({{i.unread}}){{/linkTo}}</li>
       {{/each}}
     {{else}}

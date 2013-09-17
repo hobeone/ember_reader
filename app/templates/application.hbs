@@ -4,7 +4,7 @@
       <a class="brand" href="#">EmberReader</a>
       <ul class="nav pull-right">
         <li>{{#linkTo 'feeds'}}Feeds{{/linkTo}}</li>
-        {{#if App.Session.authToken}}
+        {{#if App.Session.sessionId}}
           <li>{{#linkTo 'session.destroy'}}Logout{{/linkTo}}</li>
         {{else}}
           <li>{{#linkTo 'session.new'}}Login{{/linkTo}}</li>

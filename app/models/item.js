@@ -22,16 +22,17 @@ var Item = Ember.Model.extend({
   }.property('content'),
 
   markRead: function() {
-    var self = this;
-    return Ember.$.post(
-      App.TTRSS_URL,
-      JSON.stringify({
-        op: "updateArticle",
-        sid: window.localStorage.session_id,
-        article_ids: this.get('id'),
-        mode: 0,
-        field: 2
-      })).then(
+    if (!App.OFFLINE_DEV_MODE) {
+      var self = this;
+      return Ember.$.post(
+        App.TTRSS_URL,
+        JSON.stringify({
+          op: "updateArticle",
+          sid: App.Session.get('sessionId'),
+          article_ids: this.get('id'),
+          mode: 0,
+          field: 2
+        })).then(
         function(response) {
           console.log("Item markRead: ", response);
           if (response.content.error) {
@@ -41,7 +42,8 @@ var Item = Ember.Model.extend({
           self.set('marked_read', true);
           return true;
         }
-      );
+        );
+    }
   }
 
 });
@@ -51,7 +53,7 @@ Item.adapter = Ember.Adapter.create({
     console.log("item findall arguments:", params);
     var req = {
       op: "getHeadlines",
-      sid: App.Session.get('session_id'),
+      sid: App.Session.get('sessionId'),
       feed_id: params.id,
       show_excerpt: false,
       show_content: true,

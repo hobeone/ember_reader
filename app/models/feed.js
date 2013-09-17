@@ -5,13 +5,6 @@ var Feed = Ember.Model.extend({
   title: Ember.attr(),
   unread: Ember.attr(Number),
   items: Ember.A(),
-
-  decrementUnread: function(){
-    var u = this.get('unread');
-    if (u > 0) {
-      this.set('unread', u-1);
-    }
-  }
 });
 
 Feed.adapter = Ember.Adapter.create({
@@ -20,28 +13,38 @@ Feed.adapter = Ember.Adapter.create({
       App.TTRSS_URL,
       JSON.stringify({
         op:"getFeeds",
-        sid:window.localStorage.session_id,
+        sid: App.Session.get('sessionId'),
         cat_id:"-4"})
     ).then(
       function(response) {
         var feeds = Em.A();
+        var collections = Em.A();
         console.log("Feed findAll: ", response);
         if (response.content.error) {
+          window.alert("Error: "+response.content.error);
           throw "Error: "+response.content.error;
         }
         var filtered = Em.A();
         response.content.forEach(function (child) {
-          if (child.unread > 0) {
+          if (child.id < 0) {
+            collections.pushObject(child);
+          }
+          if (child.id > 0 && child.unread > 0) {
             filtered.pushObject(child);
           }
         });
 
+        collections.sort(
+          function(a,b) {
+            return (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0);
+          }
+        );
         filtered.sort(
           function(a,b) {
             return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0);
           }
         );
-        records.load(klass, filtered);
+        records.load(klass, collections.concat(filtered));
       }
     );
   }

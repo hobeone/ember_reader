@@ -8,7 +8,7 @@ var AuthenticatedRoute = ApplicationRoute.extend({
   },
  
   beforeModel: function(transition) {
-    if (!App.Session.get('session_id')) {
+    if (!App.Session.get('sessionId')) {
       this.redirectToLogin(transition);
     }
   }

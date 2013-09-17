@@ -9,7 +9,7 @@ var App = Ember.Application.create({
   LOG_BINDINGS: true,
   modulePrefix: 'appkit',
   TTRSS_URL: Config.TTRSS_URL,
-  OFFLINE_DEV_MODE: false,
+  OFFLINE_DEV_MODE: true,
   Resolver: Resolver,
   Router: Ember.Router.extend({
     router: router
@@ -37,12 +37,12 @@ Ember.Application.initializer({
     App.Session = Ember.Object.extend({
       init: function() {
         this._super();
-        this.set('session_id', window.localStorage['session_id']);
+        this.set('sessionId', window.localStorage['sessionId']);
       },
  
       authTokenChanged: function() {
-        window.localStorage['session_id'] = this.get('session_id');
-      }.observes('session_id'),
+        window.localStorage['sessionId'] = this.get('sessionId');
+      }.observes('sessionId'),
  
     }).create();
   }
