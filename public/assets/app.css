@@ -8,70 +8,22 @@ body{
 	word-wrap: break-word;
 	-ms-text-size-adjust: none;
 	overflow-y: scroll;
+  padding-top: 60px;
+  padding-bottom: 20px;
 }
 a:link{
 	color: #2960d9;
 }
 
-.tableview{
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	background-color: #fff;
-}
-.tableview li{
-	display: block;
-	border-top: 1px solid #e0e0e0;
-	padding: 10px;
-}
-.tableview li:first-child{
-	border-top: 0;
-}
-.tableview-links li{
-	padding: 0;
-	position: relative;
-}
-.tableview-links li>.q{
-	font-size: 15px;
-	line-height: 1.3em;
-	color: #888;
-	display: block;
-	padding: 10px 5px;
-	text-decoration: none;
-}
-.tableview-links li>a{
-	font-size: 15px;
-	line-height: 1.3em;
-	color: #000;
-	display: block;
-	padding: 10px 5px;
-	text-decoration: none;
-}
-.tableview-links li>a:visited{
-	color: #888;
-}
-.tableview-links li.read>a {
-	color: #888;
-}
-.tableview-links li.unread>a {
-	color: #000;
-}
 .sel {
 	background-color: #DAE6F6;
 }
 
-.tableview-links li>a *{
-	pointer-events: none;
-}
-.tableview-links .fav{
-	position: absolute;
-	left:10px;
-	top: 12px;
-    width: 16px;
-    height: 16px;
-}
-
-.hero-unit {
+.jumbotron {
   padding: 10px;
   margin-bottom: 10px;
+}
+
+.container {
+  margin-left: 0px;
 }

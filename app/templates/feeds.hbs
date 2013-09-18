@@ -1,16 +1,16 @@
-<div class="row-fluid">
-<div class="span3">
+<div class="row">
+<div class="col-xs-6 col-sm-3 sidebar-offcanvas">
   <ul class="unstyled" id="feed-list">
     {{#if model.isLoaded}}
       {{#each i in feeds_with_items}}
-      <li><i class="icon-list"></i>{{#linkTo "feed" i}}{{i.title}} ({{i.unread}}){{/linkTo}}</li>
+      <li><i class=".glyphicon .glyphicon-list"></i>{{#linkTo "feed" i}}{{i.title}} ({{i.unread}}){{/linkTo}}</li>
       {{/each}}
     {{else}}
     <p class="loading">Loading Feeds...</p>
     {{/if}}
 </ul>
 </div>
-<div class="span9">
+<div class="col-md-9">
   {{outlet}}
 </div>
 </div>
